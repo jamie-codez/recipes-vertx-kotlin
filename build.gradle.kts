@@ -2,6 +2,7 @@ import java.io.ByteArrayOutputStream
 
 plugins {
     application
+    jacoco
     kotlin("jvm") version "1.9.22"
     id("io.vertx.vertx-plugin") version "1.4.0"
     id("com.github.johnrengelman.shadow") version "7.1.2"
@@ -59,7 +60,7 @@ vertx {
     mainVerticle = mainVerticleName
 }
 
-application{
+application {
     mainClass = "io.vertx.core.Launcher"
 }
 
@@ -67,6 +68,28 @@ tasks.test {
     useJUnitPlatform()
 }
 
+jacoco {
+    toolVersion = "0.8.11"
+    reportsDirectory = layout.buildDirectory.dir("reports/jacoco")
+}
+
 kotlin {
     jvmToolchain(17)
+}
+
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+    finalizedBy(tasks.jacocoTestReport)
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+        csv.required.set(true)
+        html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+    }
 }
