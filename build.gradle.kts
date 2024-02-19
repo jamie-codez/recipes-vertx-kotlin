@@ -88,8 +88,8 @@ tasks.test {
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
     reports {
-        xml.required.set(true)
-        csv.required.set(true)
+        xml.required = true
+        csv.required = true
         html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
     }
 }
