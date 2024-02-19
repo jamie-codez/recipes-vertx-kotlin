@@ -92,7 +92,7 @@ tasks.jacocoTestReport {
         csv.required = true
         html.required = true
         html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
-        xml.outputLocation = layout.buildDirectory.file("reports/jacoco/jacocoTestReport.xml")
-        csv.outputLocation = layout.buildDirectory.file("reports/jacoco/jacocoTestReport.csv")
+        xml.outputLocation = layout.buildDirectory.file("reports/jacoco/test/jacocoTestReport.xml")
+        csv.outputLocation = layout.buildDirectory.file("reports/jacoco/test/jacocoTestReport.csv")
     }
 }
